@@ -10,13 +10,16 @@ public class SnakeBody : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Target = GameObject.Find("SnakeHead").transform;
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
+
 	
 	}
 	
 	// Update is called once per frame
 	void chase () {
+
         Vector3 vectorToTarget = Target.transform.position - transform.position;
         transform.position += vectorToTarget.normalized * speed * Time.deltaTime;
 	}
+
 }
