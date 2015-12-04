@@ -4,17 +4,19 @@ using System.Collections;
 public class SnakeBody : MonoBehaviour {
 
     public float speed = 3f;
-    private GameObject target;
+    public Transform Target;
+
+    //private GameObject target;
 
     // Use this for initialization
     void Start () {
-        target = GameObject.Find("SnakeHead");
+        Target = GameObject.Find("SnakeHead").transform;
 	
 	}
 	
 	// Update is called once per frame
 	void chase () {
-        float movementDistance = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, movementDistance);
-    }
+        Vector3 vectorToTarget = Target.transform.position - transform.position;
+        transform.position += vectorToTarget.normalized * speed * Time.deltaTime;
+	}
 }

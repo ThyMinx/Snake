@@ -15,6 +15,7 @@ public class SnakeMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.localPosition += Vector3.left * speed * Time.deltaTime;
+
         }
 
         {
