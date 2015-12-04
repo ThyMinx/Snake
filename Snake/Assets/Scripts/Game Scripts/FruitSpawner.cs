@@ -3,14 +3,14 @@ using System.Collections;
 
 public class FruitSpawner : MonoBehaviour {
 
-    public float waitTime = 4f;
+    //public float waitTime = 4f;
     public Transform[] spawnpoint;
     public GameObject fruit;
     public GameManager gM;
 
     void Start()
     {
-        InvokeRepeating("Spawner", 2f, waitTime);
+        Invoke("Spawner", 0);
     }
 
     void Spawner()
