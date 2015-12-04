@@ -20,6 +20,9 @@ public class Segment : MonoBehaviour
 
     List<Transform> tail = new List<Transform>();
 
+    public bool ate = false;
+    public GameObject tailPrefab;
+
     void Start()
     {
         coords = new plot();
@@ -34,6 +37,16 @@ public class Segment : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) move(directions.RIGHT);
         if (Input.GetKeyDown(KeyCode.UpArrow)) move(directions.UP);
         if (Input.GetKeyDown(KeyCode.DownArrow)) move(directions.DOWN);
+
+        //adding to tail
+        if (ate)
+        {
+            GameObject g = (GameObject)Instantiate(tailPrefab, pos, Quaternion.identity);
+
+            tail.Insert(0, g.transform);
+
+            ate = false;
+        }
 
         //arange list so that last goes to "gap"
         if (tail.Count > 0)
