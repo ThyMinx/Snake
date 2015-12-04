@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Segment : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class Segment : MonoBehaviour
     }
     plot coords;
 
+    List<Transform> tail = new List<Transform>();
+
     void Start()
     {
         coords = new plot();
@@ -24,6 +28,7 @@ public class Segment : MonoBehaviour
     void Update()
     {
         //current
+        Vector3 pos = transform.position;
         //move
         if (Input.GetKeyDown(KeyCode.LeftArrow)) move(directions.LEFT);
         if (Input.GetKeyDown(KeyCode.RightArrow)) move(directions.RIGHT);
@@ -31,6 +36,13 @@ public class Segment : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow)) move(directions.DOWN);
 
         //arange list so that last goes to "gap"
+        if (tail.Count > 0)
+        {
+            tail.Last().position = pos;
+
+            tail.Insert(0, tail.Last());
+            tail.RemoveAt(tail.Count - 1);
+        }
     }
 
     public void move(directions p_dir)
