@@ -22,46 +22,30 @@ public class Segment : MonoBehaviour
 
     public bool ate = false;
     public GameObject tailPrefab;
-
+    directions dir = directions.LEFT;
     void Start()
     {
         coords = new plot();
+        InvokeRepeating("move", 1, 0.5f);
     }
 
     void Update()
     {
-        //current
-        Vector3 pos = transform.position;
+
         //move
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) move(directions.LEFT);
-        if (Input.GetKeyDown(KeyCode.RightArrow)) move(directions.RIGHT);
-        if (Input.GetKeyDown(KeyCode.UpArrow)) move(directions.UP);
-        if (Input.GetKeyDown(KeyCode.DownArrow)) move(directions.DOWN);
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) dir = directions.LEFT;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) dir = directions.RIGHT;
+        if (Input.GetKeyDown(KeyCode.UpArrow)) dir = directions.UP;
+        if (Input.GetKeyDown(KeyCode.DownArrow)) dir = directions.DOWN;
 
-        //adding to tail
-        if (ate)
-        {
-            GameObject g = (GameObject)Instantiate(tailPrefab, pos, Quaternion.identity);
 
-            tail.Insert(0, g.transform);
-
-            ate = false;
-        }
-
-        //arange list so that last goes to "gap"
-        if (tail.Count > 0)
-        {
-            tail.Last().position = pos;
-
-            tail.Insert(0, tail.Last());
-            tail.RemoveAt(tail.Count - 1);
-        }
     }
 
-    public void move(directions p_dir)
+    public void move()
     {
-
-        switch (p_dir)
+        //current
+        Vector3 pos = transform.position;
+        switch (dir)
         {
             case directions.LEFT:
                 coords.x -= 1;
@@ -83,6 +67,24 @@ public class Segment : MonoBehaviour
                 break;
         }
         Debug.Log("x" + coords.x + "y" + coords.y);
+        //adding to tail
+        if (ate)
+        {
+            GameObject g = (GameObject)Instantiate(tailPrefab, pos, Quaternion.identity);
+
+            tail.Insert(0, g.transform);
+
+            ate = false;
+        }
+
+        //arange list so that last goes to "gap"
+        if (tail.Count > 0)
+        {
+            tail.Last().position = pos;
+
+            tail.Insert(0, tail.Last());
+            tail.RemoveAt(tail.Count - 1);
+        }
     }
 
 }
