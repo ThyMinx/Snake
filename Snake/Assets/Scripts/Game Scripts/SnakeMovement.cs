@@ -5,19 +5,15 @@ public class SnakeMovement : MonoBehaviour
 {
 
     public float speed = 0.5f;
-    public float TurnSpeed = 20f;
+    //  public float TurnSpeed = 20f;
 
 
     // Update is called once per frame
     void Update()
     {
 
-       transform.localPosition += transform.up * speed * Time.deltaTime;
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-
-            transform.Rotate(Vector3.left * TurnSpeed * Time.deltaTime);
             transform.localPosition += Vector3.left * speed * Time.deltaTime;
         }
 
@@ -25,12 +21,27 @@ public class SnakeMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 transform.localPosition += Vector3.right * speed * Time.deltaTime;
-                transform.Rotate(Vector3.right * TurnSpeed * Time.deltaTime);
 
             }
+
+            {
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    transform.localPosition += Vector3.up * speed * Time.deltaTime;
+
+                }
+            }
+
+            {
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    transform.localPosition += Vector3.down * speed * Time.deltaTime;
+
+                }
+
+
+            }
+
         }
-
-        
     }
-
 }
