@@ -5,17 +5,19 @@ public class SnakeMovement : MonoBehaviour
 {
 
     public float speed = 0.5f;
+    private bool moving = false;
     //  public float TurnSpeed = 20f;
 
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKey(KeyCode.LeftArrow))
+        moving = false;
+        if (Input.GetKey(KeyCode.LeftArrow));
         {
+            if (moving == true);
             transform.localPosition += Vector3.left * speed * Time.deltaTime;
-
+            moving = true;
         }
 
         {

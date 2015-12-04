@@ -16,7 +16,7 @@ public class SnakeBody : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void chase () {
+	void update () {
 
         Vector3 vectorToTarget = Target.transform.position - transform.position;
         transform.position += vectorToTarget.normalized * speed * Time.deltaTime;

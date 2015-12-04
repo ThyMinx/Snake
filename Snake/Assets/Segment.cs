@@ -23,11 +23,14 @@ public class Segment : MonoBehaviour
 
     void Update()
     {
+        //current
+        //move
         if (Input.GetKeyDown(KeyCode.LeftArrow)) move(directions.LEFT);
         if (Input.GetKeyDown(KeyCode.RightArrow)) move(directions.RIGHT);
         if (Input.GetKeyDown(KeyCode.UpArrow)) move(directions.UP);
         if (Input.GetKeyDown(KeyCode.DownArrow)) move(directions.DOWN);
 
+        //arange list so that last goes to "gap"
     }
 
     public void move(directions p_dir)
