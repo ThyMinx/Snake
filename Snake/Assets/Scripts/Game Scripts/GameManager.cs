@@ -5,6 +5,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     public bool paused = false;
+    public bool endGame = false;
     public int score = 0;
 
     public GameObject pauseMenu;
@@ -38,6 +39,10 @@ public class GameManager : MonoBehaviour {
                 paused = true;
                 Time.timeScale = 0;
             }
+        }
+        if (endGame)
+        {
+            Application.LoadLevel(Application.loadedLevel + 1);
         }
     }
 
